@@ -1,6 +1,6 @@
-
+/*-------------------------------- Variables --------------------------------*/
 let boycottedBrands = [
-{ name: "جونسون آند جونسون / Johnson & Johnson", image: "https://th.bing.com/th/id/OIP.j12c2hszmQE9-nfQeFwgAAHaDt?w=323&h=175&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" },
+    { name: "جونسون آند جونسون / Johnson & Johnson", image: "https://th.bing.com/th/id/OIP.j12c2hszmQE9-nfQeFwgAAHaDt?w=323&h=175&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" },
     { name: "نيفيا / Nivea", image: "https://static.beautytocare.com/cdn-cgi/image/f=auto/media/catalog/product/n/i/nivea-cream-75ml.jpg" }, 
     { name: "ديتول / Dettol", image: "https://th.bing.com/th/id/OIP.uPh0GlIE4GeLt2v-FloMOwHaHa?w=186&h=186&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" },
     { name: "كارفور / Carrefour", image: "https://th.bing.com/th/id/OIP.7UekoANjzb9_yOI5uA-QBQHaHa?w=168&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" },
@@ -47,7 +47,7 @@ let alternativeBrands = [
     { name: "LC Waikiki", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOjJGU6GGdmPYeO8cEviAg1f27Zyt_RiqoHw&s" }
 ];
 
- let allBrands=boycottedBrands.concat(alternativeBrands)
+let allBrands=boycottedBrands.concat(alternativeBrands)
 
 let score=0;
 let scoreNumber;
@@ -57,58 +57,60 @@ let gameDuration=10;
 let remaningTimer=10;
 let copyAllBrand=[];
 let currentBrandObj;
+/*-------------------------------- Constants --------------------------------*/
+
+
+/*------------------------ Cached Element References ------------------------*/
+
 const page1Element = document.getElementById('page1'); 
 const page2Element = document.getElementById('page2'); 
 const page3Element = document.getElementById('page3');
 
 const imageProdElement = document.querySelector('#image-prod');
-  const starterElement=document.querySelector('#starter')
-  const scoreElement=document.querySelector('#score')
-  const productElement=document.querySelector('#product')
-  const yesBotElement=document.querySelector('#yes')
-  const noBotElement=document.querySelector('#no')
-  const scoreNumElement=document.querySelector('#score-number')
-  const returnElement=document.querySelector('#return')
-  const timerElement=document.querySelector('#timer')
-  const openBtnEle = document.querySelector("#open-rule") 
-  const closeBtnEle = document.querySelector('#close-rule')
-
-  const soundCurrect=document.getElementById('currect')
-  const soundWrong=document.getElementById('wrong')
-  const bycottsound=document.getElementById('Boycott')
-  const firstimage=document.getElementById('iby')
-  const pupElement=document.getElementById('pup')
- 
-
-  starterElement.addEventListener('click',sart)
-  yesBotElement.addEventListener('click',YES)
-  noBotElement.addEventListener('click',NO)
-  returnElement.addEventListener('click',returnfun)
-  firstimage.addEventListener('click',() => {  bycottsound.play()})
-  openBtnEle.addEventListener('click',showPup)
-  closeBtnEle.addEventListener('click',closePup)
+const starterElement=document.querySelector('#starter')
+const scoreElement=document.querySelector('#score')
+const productElement=document.querySelector('#product')
+const yesBotElement=document.querySelector('#yes')
+const noBotElement=document.querySelector('#no')
+const scoreNumElement=document.querySelector('#score-number')
+const returnElement=document.querySelector('#return')
+const timerElement=document.querySelector('#timer')
+const openBtnEle = document.querySelector("#open-rule") 
+const closeBtnEle = document.querySelector('#close-rule')
+const closeRuleElement=document.querySelector('#close-rule')
+const soundCurrect=document.getElementById('currect')
+const soundWrong=document.getElementById('wrong')
+const bycottsound=document.getElementById('Boycott')
+const firstimage=document.getElementById('iby')
+const pupElement=document.getElementById('pup')
 
 
-
-
+/*-------------------------------- Functions --------------------------------*/
+//function of pup
 function showPup(){
     pupElement.classList.add('open')
 }
+
 function closePup(){
      pupElement.classList.remove('open')
 }
-
+//function to show pages
 function showPage(num){
     const pageElement=document.querySelectorAll('.page').forEach(onePage=>onePage.classList.remove('active'))
     const showPageElement=document.getElementById('page'+num).classList.add('active')
 }
+
+//function to start games
 function sart(){
     remaningTimer=10
     score=0
     copyAllBrand=[...allBrands]
+    bycottsound.pause();
+    bycottsound.currenTime=0;
     showPage(2)
     mainGames()
 }
+//function for timer
 function startTimer(){
    clearInterval(timerGame)
    updateTimer()
@@ -128,7 +130,7 @@ function updateTimer(){
     timerElement.style.width=persintage+"%"
 
 }
-
+//game action function 
 function mainGames(){
     if(copyAllBrand.length===0){
        clearInterval(timerGame)
@@ -136,33 +138,32 @@ function mainGames(){
         return
     }
  currentBrandObj=copyAllBrand[Math.floor(Math.random()* copyAllBrand.length)]
-
     productElement.textContent=currentBrandObj.name
     scoreNumElement.textContent=score
     if(imageProdElement){
-    imageProdElement.src=currentBrandObj.image
-    imageProdElement.alt=currentBrandObj.name
+       imageProdElement.src=currentBrandObj.image
+       imageProdElement.alt=currentBrandObj.name
     }
-  copyAllBrand = copyAllBrand.filter(item => item !== currentBrandObj)
+   copyAllBrand = copyAllBrand.filter(item => item !== currentBrandObj)
 
-startTimer()
+ startTimer()
 
 }
-
+//Yes and No 
 function YES (){
-    const isBoycotted = boycottedBrands.some(brand => brand.name === currentBrandObj.name);
+  const isBoycotted = boycottedBrands.some(brand => brand.name === currentBrandObj.name);
     if(isBoycotted){
-        score+=1
+       soundCurrect.play()
+       score+=1
        remaningTimer +=1 
        scoreElement.textContent=score;
-       soundCurrect.play()
+      
        updateTimer()
     }
     else{
-           remaningTimer --
-          soundWrong.play()
-
-           updateTimer()
+        soundWrong.play()
+        remaningTimer --
+        updateTimer()
 
     }
     if(remaningTimer<=0){
@@ -170,23 +171,23 @@ function YES (){
         showPage(3)
         return
     }
-    mainGames()
+  mainGames()
 }
 
 function NO (){
      const isAlternative = alternativeBrands.some(brand => brand.name === currentBrandObj.name);
     if(isAlternative){
+        soundCurrect.play()
         score+=1
         scoreElement.textContent=score;
-       remaningTimer +=1 
-       scoreElement.textContent=score;
-        soundCurrect.play()
-       updateTimer();
+        remaningTimer +=1 
+        scoreElement.textContent=score;
+         updateTimer();
     }
     else{
-           remaningTimer --
-           soundWrong.play()
-          updateTimer()
+        soundWrong.play()
+        remaningTimer -- 
+        updateTimer()
 
     }
      if(remaningTimer<=0){
@@ -194,13 +195,30 @@ function NO (){
         showPage(3)
         return
     }
-    mainGames()
+ mainGames()
 }
-
+//return function
 function returnfun (){
     showPage(1)
     score=0
     scoreElement.textContent=0
 }
+
+
+/*----------------------------- Event Listeners -----------------------------*/
+
+ starterElement.addEventListener('click',sart)
+  yesBotElement.addEventListener('click',YES)
+  noBotElement.addEventListener('click',NO)
+  returnElement.addEventListener('click',returnfun)
+  firstimage.addEventListener('click',() => {  bycottsound.play()})
+  openBtnEle.addEventListener('click',showPup)
+  closeBtnEle.addEventListener('click',closePup)
+
+
+ 
+
+
+
 
 

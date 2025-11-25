@@ -14,7 +14,7 @@ body {
     align-items: center;
     margin: 0;
     background-color: var(--background-light);
-   min-height: 100vh;
+    min-height: 100vh;
     font-family: 'Inter', sans-serif;
     transition: background-color 0.3s;
 }
@@ -157,13 +157,10 @@ p {
     background-color: #cccccc9d;
     border-radius: 5px;
     height: 7px;
-    
     margin-top: auto; 
     margin-bottom: 0;
-    
     margin-left: auto;
     margin-right: auto;
-    
     overflow: hidden;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
@@ -184,11 +181,9 @@ p {
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    
     display: flex;
     justify-content: center;
     align-items: center;
-    
     border: none;
     font-size: 2.5em; 
     line-height: 1; 
@@ -199,8 +194,7 @@ p {
     border: solid 4px var(--secondary-color);
     box-shadow: inset 1px 0px 10px 1.5px rgba(136, 73, 13, 0.86);
     margin: 0;
-        padding-left: 2; 
-
+    padding-left: 2; 
 }
 
 #starter:active {
@@ -256,15 +250,12 @@ img {
     display: block;
     margin: 0 auto;
     margin-top: 25px; 
-    
     border: 5px solid var(--secondary-color); 
     border-radius: 15px; 
-    
     box-shadow: 
         0px -4px 10px rgba(255, 255, 255, 0.4),
         0px 8px 15px rgba(0, 0, 0, 0.5),
-        inset 0 0 10px rgba(0, 0, 0, 0.1); 
-        
+        inset 0 0 10px rgba(0, 0, 0, 0.1);   
     transition: transform 0.3s ease-in-out, box-shadow 0.3s;
 }
 
@@ -280,26 +271,95 @@ img:hover {
 }
 
 #image-prod{
-
     width: 150px;
     height: 100PX;
     margin-top: 10px; 
-   margin-bottom:  10px;
-
+    margin-bottom:  10px;
 }
 
+@keyframes colorchange{
+    0%{
+        filter: hue-rotate(0deg);
+    }
+    100%{
+      filter: hue-rotate(360deg);
 
+    }
+} 
+@keyframes aniateone{
+    0%{
+        left:-100;
+    }
+    100%{
+        left:100;
+    }
+ } 
+#all-page{
+    animation-name: colorchange;
+    animation-duration: 5s; 
+    animation-timing-function: linear; 
+    animation-iteration-count: infinite; 
+    filter: hue-rotate(0deg);
+}  
 
-/*  */
+.bg-line {
+  position: fixed;
+  background: rgba(255, 255, 255, 0.433); 
+  z-index: -1; 
+  animation-duration: 6s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
 
+.bg-line.vertical {
+  width: 2px;
+  height: 100vh;
+  left: -10px;
+  top: 0;
+  animation-name: moveVertical;
+}
 
+.bg-line.horizontal {
+  width: 100vw;
+  height: 2px;
+  top: -10px;
+  left: 0;
+  animation-name: moveHorizontal;
+}
 
+.bg-line.horizontal2 {
+  width: 100vw;
+  height: 2px;
+  top: -20px;
+  left: 0;
+  animation-name: moveHorizontal2;
+}
+.bg-line.vertical2 {
+  width: 2px;
+  height: 100vh;
+  left: -10px;
+  top: 0;
+  animation-name: moveVertical2;
+}
 
+@keyframes moveVertical {
+  0% { left: -10px; }
+  100% { left: 100vw; }
+}
+@keyframes moveVertical2 {
+  0% { left: -150x; }
+  100% { left: 75vw; }
+}
 
+@keyframes moveHorizontal {
+  0% { top: -10px; }
+  100% { top: 100vh; }
+}
 
-
-
-
+@keyframes moveHorizontal2 {
+  0% { top: -50px; }
+  100% { top: 75vh; }
+}
 
 #open-rule{
     border: 0;
@@ -310,14 +370,17 @@ img:hover {
     width: 40px;
     transition: transform 0.2s, box-shadow 0.2s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: 180px;
     color:#7A542E;
-   
-   
+    font-weight: bold;
+    font-family:"Lora", serif;
+}
+#open-rule:hover .stars{
+  display: block;
+  filter: drop-shadow(#fffdef);
 }
 .card{
     display: flex;
@@ -335,8 +398,7 @@ img:hover {
     transform: translate(-50%,-50%);
     transition: all .5s;
     opacity: 0;
-    
-
+    clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
  }
 .card.open{
     opacity: 1;
@@ -348,15 +410,18 @@ img:hover {
     width: 100%;
     border-radius:6%;
     border:0;
-    padding: 15px;
+    padding: 10px;
     margin-top: 20px;
     background-color: #2E7D32;
     color:white;
     cursor:pointer;
-    font-size:20px ;
+    font-size:25px ;
+    font-weight: bold;
     transition: transform 0.2s, box-shadow 0.2s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    
+    font-family:"Lora", serif;
+    clip-path: polygon(5% 0%, 100% 0%, 90% 100%, 0% 100%);
+
 }
 
 #rule-image {
@@ -365,16 +430,15 @@ img:hover {
     display: block;
     margin: 0 auto;
     margin-top: 25px; 
-    
     border: 5px solid #30011E; 
     border-radius: 15px; 
-    
     box-shadow: 
         0px -4px 10px rgba(255, 255, 255, 0.4),
         0px 8px 15px rgba(0, 0, 0, 0.5),
         inset 0 0 10px rgba(0, 0, 0, 0.1); 
-        
     transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+    clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+
 }
 
 #rule-image:active {
@@ -387,12 +451,9 @@ img:hover {
 #rule-image:hover {
     cursor: pointer; 
 }
-
 #rule-image-prod{
-
     width: 150px;
     height: 100PX;
     margin-top: 10px; 
    margin-bottom:  10px;
-
 }
